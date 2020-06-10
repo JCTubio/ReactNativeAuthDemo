@@ -59,4 +59,4 @@ buck-out/
 /ios/Pods/
 
 # Config folder
-config/
+config/firebase
