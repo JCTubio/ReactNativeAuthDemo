@@ -5,13 +5,11 @@ import * as firebase from 'firebase';
 import styles from './styles';
 
 const HomeScreen = () => {
-  const [userDisplayName, setUserDisplayName] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
 
   useEffect(() => {
-    const { email, displayName } = firebase.auth().currentUser;
+    const { email } = firebase.auth().currentUser;
     setUserEmail(email);
-    setUserDisplayName(displayName);
   }, []);
 
   const handleSignOut = () => {
@@ -20,7 +18,7 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.greeting}>Hi {userDisplayName}</Text>
+      <Text style={styles.greeting}>Hi {userEmail}</Text>
       <TouchableOpacity style={styles.button} onPress={handleSignOut}>
         <Text style={styles.buttonText}>Log out</Text>
       </TouchableOpacity>
