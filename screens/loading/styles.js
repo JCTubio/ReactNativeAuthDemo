@@ -8,6 +8,9 @@ const style = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    text: {
+        marginBottom: 20
     }
 })
 

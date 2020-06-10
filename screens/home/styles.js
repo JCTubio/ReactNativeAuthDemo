@@ -8,6 +8,16 @@ const style = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    greeting: {
+        marginVertical: 32,
+        fontSize: 18,
+        fontWeight: '400',
+        textAlign: 'center',
+    },
+    buttonText: {
+        color: '#1A73E8',
+        fontWeight: '500'
     }
 })
 
