@@ -59,4 +59,4 @@ buck-out/
 /ios/Pods/
 
 # Config folder
-config/
+# config/   (in a real project, this would not be uploaded to git, but for demo purposes I am uploading so that anyone can try the demo with ease)

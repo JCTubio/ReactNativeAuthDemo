@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import * as firebase from 'firebase';
 
 import styles from './styles';
 
 const RegisterScreen = (props) => {
-
   const { navigation } = props;
 
   const [displayName, setDisplayName] = useState('');
@@ -17,12 +16,12 @@ const RegisterScreen = (props) => {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(userCredentials => {
+      .then((userCredentials) => {
         return userCredentials.user.updateProfile({
-          displayName
-        })
+          displayName,
+        });
       })
-      .catch(error => setErrorMessage(error.message))
+      .catch((error) => setErrorMessage(error.message));
   };
 
   return (
@@ -66,9 +65,10 @@ const RegisterScreen = (props) => {
       <TouchableOpacity style={styles.button} onPress={handleSignUp}>
         <Text style={styles.buttonText}>Sign up</Text>
       </TouchableOpacity>
+      <View style={styles.divider} />
       <View style={styles.redirectTextContainer}>
         <Text>Already registered? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <Text style={styles.linkText}>Log in</Text>
         </TouchableOpacity>
       </View>
