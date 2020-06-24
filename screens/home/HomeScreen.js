@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { GoogleSignin } from 'react-native-google-signin';
-import * as firebase from 'firebase';
+import auth from '@react-native-firebase/auth';
 
 import styles from './styles';
 
@@ -9,7 +9,7 @@ const HomeScreen = () => {
   const [userEmail, setUserEmail] = useState(null);
 
   useEffect(() => {
-    const { currentUser } = firebase.auth();
+    const { currentUser } = auth();
     const { email } = currentUser;
     console.log(currentUser);
     setUserEmail(email);
@@ -30,7 +30,7 @@ const HomeScreen = () => {
     /*
      }
      */
-    firebase.auth().signOut();
+    auth().signOut();
   };
 
   return (

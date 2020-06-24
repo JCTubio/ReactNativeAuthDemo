@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
     height: 30,
   },
   form: {
-    marginBottom: 18,
     marginHorizontal: 30,
   },
   formTitle: {

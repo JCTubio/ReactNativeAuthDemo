@@ -1,9 +1,19 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+  keyboardAvoidingView: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  inner: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  titleContainer: {
+    flex: 1,
   },
   greeting: {
     marginTop: 32,
@@ -23,27 +33,55 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     textAlign: 'center',
   },
+  inputErrorMessage: {
+    color: '#E9446A',
+    fontSize: 13,
+    fontWeight: '600',
+    textAlign: 'right',
+  },
   form: {
-    marginBottom: 18,
+    flex: 1,
     marginHorizontal: 30,
   },
+  profilePicInputField: {
+    flex: 1,
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+  profilePic: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 20,
+  },
+  profilePicUploadButton: {
+    alignItems: 'center',
+    padding: 10,
+  },
   inputContainer: {
+    height: 40,
+    marginBottom: 42,
+  },
+  selectorContainer: {
     marginBottom: 32,
+  },
+  selectorInner: {
+    borderBottomColor: '#8A8F9E',
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   inputTitle: {
     color: '#8A8F9E',
-    fontSize: 10,
+    fontSize: 12,
     textTransform: 'uppercase',
   },
   input: {
     borderBottomColor: '#8A8F9E',
     borderBottomWidth: StyleSheet.hairlineWidth,
-    height: 40,
+    height: 42,
     fontSize: 15,
     color: '#161F3D',
   },
   button: {
-    marginHorizontal: 30,
     backgroundColor: '#4A90E2',
     borderRadius: 4,
     height: 52,
@@ -56,7 +94,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   redirectTextContainer: {
-    flex: 1,
+    flex: 0,
     flexDirection: 'row',
     justifyContent: 'center',
     marginHorizontal: 30,
@@ -64,16 +102,6 @@ const styles = StyleSheet.create({
   linkText: {
     color: '#1A73E8',
     fontWeight: '500',
-  },
-  divider: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 10,
-    marginHorizontal: 30,
-    borderBottomColor: '#8A8F9E',
-    borderBottomWidth: 1,
   },
 });
 

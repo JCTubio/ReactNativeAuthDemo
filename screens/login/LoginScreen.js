@@ -5,7 +5,7 @@ import {
   GoogleSigninButton,
   statusCodes,
 } from 'react-native-google-signin';
-import * as firebase from 'firebase';
+import auth from '@react-native-firebase/auth';
 
 import googleSignInConfiguration from '../../config/googleSignIn';
 
@@ -29,8 +29,7 @@ const LoginScreen = (props) => {
 
   const handleLogin = () => {
     clearErrorMessage();
-    firebase
-      .auth()
+    auth()
       .signInWithEmailAndPassword(email, password)
       .catch((error) => setErrorMessage(error.message));
   };
@@ -38,47 +37,44 @@ const LoginScreen = (props) => {
   const handleGoogleSignUp = async () => {
     const syncLogInStatusToFirebase = (googleUser) => {
       // We need to register an Observer on Firebase Auth to make sure auth is initialized.
-      const unsubscribe = firebase
-        .auth()
-        .onAuthStateChanged(function(firebaseUser) {
-          unsubscribe();
-          // Check if we are already signed-in in Firebase with the correct user.
-          if (
-            firebaseUser === null ||
-            googleUser.user.email !== firebaseUser.email
-          ) {
-            // Build Firebase credential with the Google ID token.
-            const credential = firebase.auth.GoogleAuthProvider.credential(
-              googleUser.idToken
-            );
-            // Sign in with credential from the Google user.
-            firebase
-              .auth()
-              .signInWithCredential(credential)
-              .catch(function(error) {
-                // Handle Errors here.
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                // The email of the user's account used.
-                const errorEmail = error.email;
-                // The firebase.auth.AuthCredential type that was used.
-                const errorCredential = error.credential;
-                if (
-                  errorCode === 'auth/account-exists-with-different-credential'
-                ) {
-                  setErrorMessage(
-                    'Email already associated with another account.'
-                  );
-                  console.log('errorCode: ', errorCode);
-                  console.log('errorMessage: ', errorMessage);
-                  console.log('errorEmail: ', errorEmail);
-                  console.log('errorCredential: ', errorCredential);
-                } else {
-                  console.log(error);
-                }
-              });
-          }
-        });
+      const unsubscribe = auth().onAuthStateChanged(function(firebaseUser) {
+        unsubscribe();
+        // Check if we are already signed-in in Firebase with the correct user.
+        if (
+          firebaseUser === null ||
+          googleUser.user.email !== firebaseUser.email
+        ) {
+          // Build Firebase credential with the Google ID token.
+          const credential = auth.GoogleAuthProvider.credential(
+            googleUser.idToken
+          );
+          // Sign in with credential from the Google user.
+          auth()
+            .signInWithCredential(credential)
+            .catch(function(error) {
+              // Handle Errors here.
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              // The email of the user's account used.
+              const errorEmail = error.email;
+              // The firebase auth.AuthCredential type that was used.
+              const errorCredential = error.credential;
+              if (
+                errorCode === 'auth/account-exists-with-different-credential'
+              ) {
+                setErrorMessage(
+                  'Email already associated with another account.'
+                );
+                console.log('errorCode: ', errorCode);
+                console.log('errorMessage: ', errorMessage);
+                console.log('errorEmail: ', errorEmail);
+                console.log('errorCredential: ', errorCredential);
+              } else {
+                console.log(error);
+              }
+            });
+        }
+      });
     };
     try {
       setGoogleSigninInProgress(true);
