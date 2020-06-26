@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
   },
   greeting: {
     marginTop: 32,
+    marginBottom: 32,
     fontSize: 18,
     fontWeight: '400',
     textAlign: 'center',
@@ -45,66 +46,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '600',
     textAlign: 'center',
-  },
-  inputErrorMessage: {
-    color: '#E9446A',
-    fontSize: 13,
-    fontWeight: '600',
-    textAlign: 'right',
-  },
-  form: {
-    flex: 1,
-    marginHorizontal: 30,
-  },
-  profilePicInputField: {
-    flex: 1,
-    alignItems: 'center',
-    marginBottom: 30,
-  },
-  profilePic: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    marginBottom: 20,
-  },
-  profilePicUploadButton: {
-    alignItems: 'center',
-    padding: 10,
-  },
-  inputContainer: {
-    height: 40,
-    marginBottom: 42,
-  },
-  selectorContainer: {
-    marginBottom: 32,
-  },
-  selectorInner: {
-    borderBottomColor: '#8A8F9E',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-  inputTitle: {
-    color: '#8A8F9E',
-    fontSize: 12,
-    textTransform: 'uppercase',
-  },
-  input: {
-    borderBottomColor: '#8A8F9E',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    height: 42,
-    fontSize: 15,
-    color: '#161F3D',
-  },
-  button: {
-    backgroundColor: '#4A90E2',
-    borderRadius: 4,
-    height: 52,
-    marginBottom: 18,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonText: {
-    color: '#fff',
-    fontWeight: '500',
   },
   redirectTextContainer: {
     flex: 0,

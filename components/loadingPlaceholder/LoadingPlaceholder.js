@@ -3,7 +3,7 @@ import { View, Text, ActivityIndicator } from 'react-native';
 
 import styles from './styles';
 
-const LoadingAnimation = (props) => {
+const LoadingPlaceholder = (props) => {
   const { message, size } = props;
 
   return (
@@ -14,4 +14,4 @@ const LoadingAnimation = (props) => {
   );
 };
 
-export default LoadingAnimation;
+export default LoadingPlaceholder;

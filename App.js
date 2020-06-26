@@ -19,12 +19,11 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    auth().onAuthStateChanged((user) => {
-      console.log('user logged in or out');
-      console.log(user);
+    const subscriber = auth().onAuthStateChanged((user) => {
       FirebaseService.setUser(user);
       setCurrentUser(user);
     });
+    return subscriber;
   });
 
   return (
@@ -37,6 +36,7 @@ export default function App() {
           <AppStack.Screen name={ROUTES.home} component={HomeScreen} />
           <AppStack.Screen
             name={ROUTES.profileEdit}
+            options={{ headerShown: false }}
             component={ProfileEditScreen}
           />
         </AppStack.Navigator>

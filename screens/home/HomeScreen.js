@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 
-import LoadingAnimation from '../../components/loadingAnimation';
+import LoadingPlaceholder from '../../components/loadingPlaceholder';
 import FirebaseService from '../../services/firebase';
 import { COLLECTIONS } from '../../constants/firebase';
 import { ROUTES } from '../../constants/routes';
@@ -75,7 +75,7 @@ const HomeScreen = (props) => {
   return (
     <View style={styles.container}>
       {isLoading ? (
-        <LoadingAnimation message='Loading user data...' />
+        <LoadingPlaceholder message='Loading user data...' />
       ) : (
         <View>
           <Text style={styles.greeting}>Hi {userEmail}</Text>

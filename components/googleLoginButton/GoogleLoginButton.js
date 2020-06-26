@@ -61,7 +61,6 @@ const GoogleLoginButton = (props) => {
       const googleResponse = await GoogleSignin.signIn();
       setGoogleSigninInProgress(false);
       syncLogInStatusToFirebase(googleResponse);
-      console.log(googleResponse);
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         console.log(error);

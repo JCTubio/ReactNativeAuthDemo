@@ -2,24 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import auth from '@react-native-firebase/auth';
 
+import Form from '../../components/form';
 import FacebookLoginButton from '../../components/facebookLoginButton';
 import GoogleLoginButton from '../../components/googleLoginButton';
 import { ROUTES } from '../../constants/routes';
+import { LOGIN_FORM } from '../../constants/forms';
 
 import styles from './styles';
 
 const LoginScreen = (props) => {
   const { navigation } = props;
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState(null);
 
   const clearErrorMessage = () => {
     setErrorMessage(null);
   };
 
-  const handleLogin = () => {
+  const handleLogin = (data) => {
+    console.log(data);
+    const { email, password } = data;
     clearErrorMessage();
     auth()
       .signInWithEmailAndPassword(email, password)
@@ -44,33 +46,11 @@ const LoginScreen = (props) => {
         <FacebookLoginButton />
         <GoogleLoginButton handleErrors={(error) => setErrorMessage(error)} />
       </View>
-      <View style={styles.form}>
-        <Text style={styles.formTitle}>
-          Or sign in using email and password
-        </Text>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputTitle}>Email Address</Text>
-          <TextInput
-            style={styles.input}
-            autoCapitalize='none'
-            onChangeText={(value) => setEmail(value)}
-            value={email}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputTitle}>Password</Text>
-          <TextInput
-            style={styles.input}
-            secureTextEntry
-            autoCapitalize='none'
-            onChangeText={(value) => setPassword(value)}
-            value={password}
-          />
-        </View>
-      </View>
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Sign in</Text>
-      </TouchableOpacity>
+      <Form
+        title='Or sign in using email and password'
+        formData={LOGIN_FORM}
+        onSubmit={handleLogin}
+      />
       <View style={styles.redirectTextContainer}>
         <Text>New to this app? </Text>
         <TouchableOpacity onPress={() => navigation.navigate(ROUTES.register)}>

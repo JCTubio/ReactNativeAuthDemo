@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'flex-start',
     backgroundColor: '#fff',
   },
   greeting: {
@@ -26,30 +27,6 @@ const styles = StyleSheet.create({
   errorMessageHidden: {
     height: 30,
   },
-  form: {
-    marginHorizontal: 30,
-  },
-  formTitle: {
-    marginBottom: 20,
-    fontSize: 16,
-    fontWeight: '600',
-    textAlign: 'center',
-  },
-  inputContainer: {
-    marginBottom: 32,
-  },
-  inputTitle: {
-    color: '#8A8F9E',
-    fontSize: 10,
-    textTransform: 'uppercase',
-  },
-  input: {
-    borderBottomColor: '#8A8F9E',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    height: 40,
-    fontSize: 15,
-    color: '#161F3D',
-  },
   button: {
     marginHorizontal: 30,
     backgroundColor: '#4A90E2',
@@ -64,7 +41,6 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   redirectTextContainer: {
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     marginHorizontal: 30,
