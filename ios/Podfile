@@ -79,6 +79,8 @@ target 'FirebaseAuthDemo' do
 
   pod 'RNGoogleSignin', :path => '../node_modules/react-native-google-signin'
 
+  pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
+
   target 'FirebaseAuthDemoTests' do
     inherit! :complete
     # Pods for testing
