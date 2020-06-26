@@ -1,5 +1,5 @@
 const userModel = {
-  name: '',
+  firstName: '',
   lastName: '',
   email: '',
   phoneNumber: '',

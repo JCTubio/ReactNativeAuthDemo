@@ -28,7 +28,6 @@ import { ROUTES } from '../../constants/routes';
 import {
   validateAlpha,
   validateRequired,
-  validateEmail,
   validateNumeric,
   formatObjectWithModel,
 } from '../../utils/helpers';
@@ -57,8 +56,8 @@ const pickerSelectStyles = StyleSheet.create({
   },
 });
 
-const RegisterScreen = (props) => {
-  const { navigation } = props;
+const ProfileEdit = (props) => {
+  const { navigation, route } = props;
 
   const {
     register,
@@ -73,6 +72,8 @@ const RegisterScreen = (props) => {
   });
 
   const headerHeight = useHeaderHeight();
+
+  const [email, setEmail] = useState('');
 
   useEffect(() => {
     register(
@@ -101,40 +102,6 @@ const RegisterScreen = (props) => {
       }
     );
     register(
-      { name: 'email' },
-      {
-        validate: {
-          required: () =>
-            validateRequired(getValues('email')) || 'Email is required',
-          emailFormat: () =>
-            validateEmail(getValues('email')) ||
-            'The email is incorrectly formatted',
-        },
-      }
-    );
-    register(
-      { name: 'password' },
-      {
-        validate: {
-          required: () =>
-            validateRequired(getValues('password')) || 'Password is required',
-        },
-      }
-    );
-    register(
-      { name: 'repeatedPassword' },
-      {
-        validate: {
-          required: () =>
-            validateRequired(getValues('repeatedPassword')) ||
-            'This field is required',
-          passwordsMatch: () =>
-            getValues('repeatedPassword') === getValues('password') ||
-            "The passwords don't match",
-        },
-      }
-    );
-    register(
       { name: 'phoneNumber' },
       {
         validate: {
@@ -157,10 +124,35 @@ const RegisterScreen = (props) => {
         },
       }
     );
-  }, [register]);
+    register(
+      { name: 'profilePicture' },
+      {
+        validate: {
+          required: () =>
+            validateRequired(getValues('profilePicture')) ||
+            'Please upload a profile picture',
+        },
+      }
+    );
+    const user = FirebaseService.getUser();
+    setEmail(user.email);
+    if (
+      Boolean(route) &&
+      Boolean(route.params) &&
+      Boolean(route.params.userData)
+    ) {
+      populateInitialData(route.params.userData);
+    }
+  }, [register, route.params]);
+
+  const populateInitialData = (data) => {
+    Object.keys(data).forEach((key) => {
+      setValue(key, data[key]);
+    });
+  };
 
   const [errorMessage, setErrorMessage] = useState(null);
-  const [profilePicture, setProfilePicture] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInputValueChange = (inputName, inputValue) => {
     clearError(inputName);
@@ -189,7 +181,7 @@ const RegisterScreen = (props) => {
           () => {
             firebaseImage.ref.getDownloadURL().then((firebaseURL) => {
               console.log(firebaseURL);
-              setProfilePicture(firebaseURL);
+              setValue('profilePicture', firebaseURL);
             });
           }
         );
@@ -197,24 +189,36 @@ const RegisterScreen = (props) => {
     });
   };
 
-  const handleSignUp = async (data) => {
-    const { email, password } = data;
-    const formattedData = formatObjectWithModel(data, userModel);
+  const handleSaveProfile = async (data) => {
+    const formattedData = formatObjectWithModel({ ...data, email }, userModel);
     // TODO make rollback in case one of these Promises fails
-    await FirebaseService.createDocument(
+    const response = await FirebaseService.createDocument(
       COLLECTIONS.users,
       formattedData,
       email
     );
-    FirebaseService.createUserWithEmailAndPassword(email, password);
+    if (!Boolean(response.error)) {
+      navigation.navigate(ROUTES.home, { userData: formattedData });
+    } else {
+      setErrorMessage(response.error.message);
+      setIsLoading(false);
+    }
   };
 
   const validateForm = async () => {
+    setIsLoading(true);
+    setErrorMessage('');
     const values = getValues();
     let validationSucceeded = await triggerValidation();
-    if (validationSucceeded && profilePicture) {
-      handleSubmit(handleSignUp({ ...values, profilePicture }));
+    if (validationSucceeded) {
+      handleSubmit(handleSaveProfile({ ...values }));
+    } else {
+      setIsLoading(false);
     }
+  };
+
+  const handleSignOut = async () => {
+    FirebaseService.signOut();
   };
 
   return (
@@ -226,21 +230,29 @@ const RegisterScreen = (props) => {
       >
         <ScrollView style={styles.container}>
           <View style={styles.inner}>
+            <View style={styles.logoutContainer}>
+              <TouchableOpacity
+                style={styles.textButton}
+                onPress={handleSignOut}
+              >
+                <Text style={styles.textButtonText}>Log out</Text>
+              </TouchableOpacity>
+            </View>
             <Text
               style={styles.greeting}
-            >{`Hello!\nSign up to get started.`}</Text>
+            >{`Hey there!\n\nWe would like to get\nto know you better\nbefore getting started.`}</Text>
             <View style={styles.errorMessageContainer}>
-              {errorMessage && (
+              {Boolean(errorMessage) && (
                 <Text style={styles.errorMessage}>{errorMessage}</Text>
               )}
             </View>
 
             <View style={styles.form}>
               <View style={styles.profilePicInputField}>
-                {profilePicture ? (
+                {getValues('profilePicture') ? (
                   <Image
                     style={styles.profilePic}
-                    source={{ uri: profilePicture }}
+                    source={{ uri: getValues('profilePicture') }}
                   />
                 ) : null}
                 <Button
@@ -254,6 +266,7 @@ const RegisterScreen = (props) => {
                 <TextInput
                   style={styles.input}
                   autoCapitalize='words'
+                  value={getValues('firstName')}
                   onChangeText={(value) =>
                     handleInputValueChange('firstName', value)
                   }
@@ -271,6 +284,7 @@ const RegisterScreen = (props) => {
                 <TextInput
                   style={styles.input}
                   autoCapitalize='words'
+                  value={getValues('lastName')}
                   onChangeText={(value) =>
                     handleInputValueChange('lastName', value)
                   }
@@ -282,61 +296,11 @@ const RegisterScreen = (props) => {
                 </ErrorMessage>
               </View>
               <View style={styles.inputContainer}>
-                <Text style={styles.inputTitle}>Email Address</Text>
-                <TextInput
-                  style={styles.input}
-                  autoCapitalize='none'
-                  onChangeText={(value) =>
-                    handleInputValueChange('email', value)
-                  }
-                />
-                <ErrorMessage as={<View />} errors={errors} name='email'>
-                  {({ message }) => (
-                    <Text style={styles.inputErrorMessage}>{message}</Text>
-                  )}
-                </ErrorMessage>
-              </View>
-              <View style={styles.inputContainer}>
-                <Text style={styles.inputTitle}>Password</Text>
-                <TextInput
-                  style={styles.input}
-                  secureTextEntry
-                  autoCapitalize='none'
-                  onChangeText={(value) =>
-                    handleInputValueChange('password', value)
-                  }
-                />
-                <ErrorMessage as={<View />} errors={errors} name='password'>
-                  {({ message }) => (
-                    <Text style={styles.inputErrorMessage}>{message}</Text>
-                  )}
-                </ErrorMessage>
-              </View>
-              <View style={styles.inputContainer}>
-                <Text style={styles.inputTitle}>Repeat Password</Text>
-                <TextInput
-                  style={styles.input}
-                  secureTextEntry
-                  autoCapitalize='none'
-                  onChangeText={(value) =>
-                    handleInputValueChange('repeatedPassword', value)
-                  }
-                />
-                <ErrorMessage
-                  as={<View />}
-                  errors={errors}
-                  name='repeatedPassword'
-                >
-                  {({ message }) => (
-                    <Text style={styles.inputErrorMessage}>{message}</Text>
-                  )}
-                </ErrorMessage>
-              </View>
-              <View style={styles.inputContainer}>
                 <Text style={styles.inputTitle}>Phone number</Text>
                 <TextInput
                   style={styles.input}
                   autoCapitalize='none'
+                  value={getValues('phoneNumber')}
                   onChangeText={(value) =>
                     handleInputValueChange('phoneNumber', value)
                   }
@@ -352,6 +316,7 @@ const RegisterScreen = (props) => {
                   <Text style={styles.inputTitle}>Country code</Text>
                   <RNPickerSelect
                     useNativeAndroidPickerStyle={false}
+                    value={getValues('countryCode')}
                     onValueChange={(value) =>
                       handleInputValueChange('countryCode', value)
                     }
@@ -366,7 +331,7 @@ const RegisterScreen = (props) => {
                 </ErrorMessage>
               </View>
               <TouchableOpacity style={styles.button} onPress={validateForm}>
-                <Text style={styles.buttonText}>Sign up</Text>
+                <Text style={styles.buttonText}>Sign up </Text>
               </TouchableOpacity>
               <View style={styles.redirectTextContainer}>
                 <Text>Already registered? </Text>
@@ -384,4 +349,4 @@ const RegisterScreen = (props) => {
   );
 };
 
-export default RegisterScreen;
+export default ProfileEdit;

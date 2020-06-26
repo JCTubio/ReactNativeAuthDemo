@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View } from 'react-native';
 import auth from '@react-native-firebase/auth';
+
+import LoadingAnimation from '../../components/loadingAnimation';
+import FirebaseService from '../../services/firebase';
+import { ROUTES } from '.././../constants/routes';
 
 import styles from './styles';
 
@@ -9,14 +13,14 @@ const LoadingScreen = (props) => {
 
   useEffect(() => {
     auth().onAuthStateChanged((user) => {
-      navigation.navigate(user ? 'App' : 'Auth');
+      FirebaseService.setUser(user);
+      navigation.navigate(user ? ROUTES.app : ROUTES.auth);
     });
   });
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>LoadingScreen</Text>
-      <ActivityIndicator size='large' />
+      <LoadingAnimation />
     </View>
   );
 };

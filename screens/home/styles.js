@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   greeting: {
     marginVertical: 32,
@@ -16,6 +16,29 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#1A73E8',
     fontWeight: '500',
+  },
+  userDataContainer: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    flexGrow: 0.75,
+    marginBottom: 20,
+  },
+  fieldContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+  },
+  fieldName: {
+    fontSize: 16,
+  },
+  fieldValue: {
+    paddingLeft: 10,
+    fontSize: 14,
+  },
+  imageField: {
+    height: 25,
+    width: 25,
   },
 });
 

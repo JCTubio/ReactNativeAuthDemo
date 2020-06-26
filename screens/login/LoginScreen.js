@@ -8,6 +8,7 @@ import {
 import auth from '@react-native-firebase/auth';
 
 import googleSignInConfiguration from '../../config/googleSignIn';
+import { ROUTES } from '../../constants/routes';
 
 import styles from './styles';
 
@@ -157,7 +158,7 @@ const LoginScreen = (props) => {
       </TouchableOpacity>
       <View style={styles.redirectTextContainer}>
         <Text>New to this app? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+        <TouchableOpacity onPress={() => navigation.navigate(ROUTES.register)}>
           <Text style={styles.linkText}>Sign up</Text>
         </TouchableOpacity>
       </View>

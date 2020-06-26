@@ -12,7 +12,9 @@ export const validateRequired = (input) => {
 };
 
 export const validateAlpha = (input) => {
-  return Boolean(input) && isAlpha(String(input));
+  return (
+    Boolean(input) && input.split(' ').every((word) => isAlpha(String(word)))
+  );
 };
 
 export const validateZipCode = (input) => {
@@ -30,4 +32,13 @@ export const formatObjectWithModel = (object, model) => {
     .reduce((obj, key) => {
       return { ...obj, [key]: object[key] };
     }, {});
+};
+
+export const validateObjectWithModel = (object, model) => {
+  return (
+    Boolean(object) &&
+    Object.keys(model).reduce((validation, key) => {
+      return validation && Boolean(object[key]);
+    }, true)
+  );
 };

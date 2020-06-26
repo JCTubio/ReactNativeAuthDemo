@@ -1,19 +1,13 @@
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import { GoogleSignin } from 'react-native-google-signin';
 
 class FirebaseService {
+  constructor() {
+    this.user = null;
+  }
+
   async getDocuments(collection) {
-    /*
-    firestore()
-      .collection(collection)
-      .get()
-      .then(querySnapshot => {
-        return querySnapshot.docs.map(documentSnapshot => documentSnapshot.data())
-      })
-      .catch((error) => {
-          console.log(error)
-      });
-      */
     try {
       const response = await firestore()
         .collection(collection)
@@ -63,14 +57,17 @@ class FirebaseService {
           .collection(collection)
           .doc(documentId)
           .set(data);
+        return { error: null };
       } else {
         await firestore()
           .collection(collection)
           .add(data);
+        return { error: null };
       }
     } catch (e) {
       console.log(`Error uploading a document to collection: ${collection}`);
       console.log(e);
+      return { error: e };
     }
   }
 
@@ -105,6 +102,24 @@ class FirebaseService {
       .catch((error) => {
         return ({ code, message } = error);
       });
+  }
+
+  async signOut() {
+    try {
+      await GoogleSignin.revokeAccess();
+      await GoogleSignin.signOut();
+    } catch (error) {
+      console.log(error);
+    }
+    auth().signOut();
+  }
+
+  setUser(user) {
+    this.user = user;
+  }
+
+  getUser() {
+    return this.user;
   }
 }
 
