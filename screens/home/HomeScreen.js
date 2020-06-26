@@ -83,7 +83,7 @@ const HomeScreen = (props) => {
             {renderUserData(userProfileData)}
           </View>
           <TouchableOpacity style={styles.button} onPress={handleSignOut}>
-            <Text style={styles.buttonText}>Log out</Text>
+            <Text style={styles.buttonText}>Sign out</Text>
           </TouchableOpacity>
         </View>
       )}
