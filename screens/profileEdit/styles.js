@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../styles/colors';
 
 const styles = StyleSheet.create({
   keyboardAvoidingView: {
@@ -6,7 +7,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
   },
   inner: {
     flex: 1,
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   textButtonText: {
-    color: '#1A73E8',
+    color: colors.brand,
     fontWeight: '500',
   },
   greeting: {
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
   },
   errorMessage: {
-    color: '#E9446A',
+    color: colors.error,
     fontSize: 13,
     fontWeight: '600',
     textAlign: 'center',
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
   },
   linkText: {
-    color: '#1A73E8',
+    color: colors.brand,
     fontWeight: '500',
   },
 });

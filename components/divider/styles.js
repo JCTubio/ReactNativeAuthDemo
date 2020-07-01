@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../styles/colors';
 
 const styles = StyleSheet.create({
   divider: {
@@ -9,7 +10,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width: 'auto',
     paddingHorizontal: 20,
-    backgroundColor: 'white',
     textAlign: 'center',
   },
   dividerFirstBlock: {

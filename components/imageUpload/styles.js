@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../styles/colors';
 
 const styles = StyleSheet.create({
   inputField: {
@@ -16,13 +17,13 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    backgroundColor: '#4A90E2',
-    color: '#4A90E2',
+    backgroundColor: colors.brand,
+    color: colors.brand,
     alignItems: 'center',
     padding: 10,
   },
   buttonText: {
-    color: 'white',
+    color: colors.white,
     fontSize: 16,
   },
 });

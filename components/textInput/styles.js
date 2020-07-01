@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -6,19 +7,19 @@ const styles = StyleSheet.create({
     marginBottom: 46,
   },
   title: {
-    color: '#8A8F9E',
+    color: colors.manatee,
     fontSize: 12,
     textTransform: 'uppercase',
   },
   input: {
-    borderBottomColor: '#8A8F9E',
+    borderBottomColor: colors.manatee,
     borderBottomWidth: StyleSheet.hairlineWidth,
     height: 42,
     fontSize: 15,
-    color: '#161F3D',
+    color: colors.brandDark,
   },
   errorMessage: {
-    color: '#E9446A',
+    color: colors.error,
     fontSize: 13,
     fontWeight: '600',
     textAlign: 'right',

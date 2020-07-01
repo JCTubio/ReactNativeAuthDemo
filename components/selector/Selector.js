@@ -2,6 +2,7 @@ import React from 'react';
 import { ErrorMessage } from 'react-hook-form';
 import RNPickerSelect from 'react-native-picker-select';
 import { View, Text, StyleSheet } from 'react-native';
+import colors from '../../styles/colors';
 
 import styles from './styles';
 
@@ -11,9 +12,9 @@ const pickerSelectStyles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 10,
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: colors.silver,
     borderRadius: 4,
-    color: 'black',
+    color: colors.black,
     paddingRight: 30, // to ensure the text is never behind the icon
   },
   inputAndroid: {
@@ -23,7 +24,7 @@ const pickerSelectStyles = StyleSheet.create({
     borderRadius: 8,
     paddingRight: 30, // to ensure the text is never behind the icon
     height: 40,
-    color: '#161F3D',
+    color: colors.brandDark,
   },
 });
 

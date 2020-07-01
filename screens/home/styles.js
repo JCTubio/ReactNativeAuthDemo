@@ -1,9 +1,10 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
@@ -14,7 +15,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   buttonText: {
-    color: '#1A73E8',
+    color: colors.brand,
     fontWeight: '500',
   },
   userDataContainer: {

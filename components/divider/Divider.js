@@ -2,15 +2,17 @@ import React from 'react';
 import { View, Text } from 'react-native';
 
 import styles from './styles';
+import colors from '../../styles/colors';
 
 const Divider = (props) => {
   const {
     height = 40,
     fontSize = 16,
     text,
-    textColor = 'grey',
-    lineColor = 'grey',
-    backgroundColor = 'rgba(0,0,0,0)',
+    textColor = colors.silver,
+    lineColor = colors.silver,
+    textBackgroundColor = colors.white,
+    backgroundColor = colors.transparent,
   } = props;
 
   return (
@@ -36,7 +38,7 @@ const Divider = (props) => {
           top: height / 2 - fontSize / 2,
           left: 0,
           right: 0,
-          backgroundColor: 'rgba(0,0,0,0)',
+          backgroundColor: colors.transparent,
         }}
       >
         <Text
@@ -45,6 +47,7 @@ const Divider = (props) => {
             lineHeight: fontSize,
             fontSize,
             color: textColor,
+            backgroundColor: textBackgroundColor,
           }}
         >
           {text}

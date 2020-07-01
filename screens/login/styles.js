@@ -1,11 +1,12 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexGrow: 1,
     justifyContent: 'flex-start',
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
   },
   greeting: {
     marginTop: 32,
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
   },
   errorMessage: {
-    color: '#E9446A',
+    color: colors.error,
     fontSize: 13,
     fontWeight: '600',
     textAlign: 'center',
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
   },
   linkText: {
-    color: '#1A73E8',
+    color: colors.brand,
     fontWeight: '500',
   },
   socialLoginButtons: {
