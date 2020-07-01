@@ -1,5 +1,6 @@
 export const ROUTES = {
   app: 'App',
+  splash: 'splash',
   auth: 'auth',
   loading: 'Loading',
   home: 'Home',

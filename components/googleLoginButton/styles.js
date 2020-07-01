@@ -1,13 +1,17 @@
 import { StyleSheet } from 'react-native';
+import buttonStyles from '../../styles/buttons';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  button: {
+    backgroundColor: '#DB4437',
+    color: '#DB4437',
+    ...buttonStyles.default,
   },
-  message: {
-    marginTop: 20,
+  text: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 

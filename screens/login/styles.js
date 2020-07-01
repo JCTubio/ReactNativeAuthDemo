@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexGrow: 1,
     justifyContent: 'flex-start',
     backgroundColor: '#fff',
   },
@@ -13,7 +14,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   errorMessageContainer: {
-    height: 72,
+    height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: 30,
@@ -25,20 +26,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   errorMessageHidden: {
-    height: 30,
-  },
-  button: {
-    marginHorizontal: 30,
-    backgroundColor: '#4A90E2',
-    borderRadius: 4,
-    height: 52,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 18,
-  },
-  buttonText: {
-    color: '#fff',
-    fontWeight: '500',
+    height: 50,
   },
   redirectTextContainer: {
     flexDirection: 'row',
@@ -50,14 +38,14 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   socialLoginButtons: {
-    borderBottomColor: '#8A8F9E',
-    borderBottomWidth: StyleSheet.hairlineWidth,
     marginHorizontal: 30,
-    marginBottom: 30,
+    marginBottom: 20,
   },
-  googleLoginButton: {
-    height: 70,
-    width: '100%',
+  socialButtonWrapper: {
+    marginBottom: 20,
+  },
+  dividerWrapper: {
+    marginHorizontal: 30,
     marginBottom: 30,
   },
 });

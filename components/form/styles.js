@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import buttonStyles from '../../styles/buttons';
 
 const styles = StyleSheet.create({
   form: {
@@ -6,15 +7,16 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#4A90E2',
-    borderRadius: 4,
-    height: 52,
+    color: '#4A90E2',
     marginBottom: 18,
-    alignItems: 'center',
-    justifyContent: 'center',
+    ...buttonStyles.default,
   },
   buttonText: {
+    fontSize: 18,
+    fontWeight: 'bold',
     color: '#fff',
     fontWeight: '500',
+    textAlign: 'center',
   },
   title: {
     paddingHorizontal: 5,

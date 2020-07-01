@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { View, Button } from 'react-native';
+import { TouchableOpacity, Text } from 'react-native';
 import { GoogleSignin, statusCodes } from 'react-native-google-signin';
 import auth from '@react-native-firebase/auth';
 
 import googleSignInConfiguration from '../../config/googleSignIn';
 
+import styles from './styles';
+
 const GoogleLoginButton = (props) => {
-  const { handleErrors } = props;
+  const { handleErrors, text = 'Google Sign-In' } = props;
 
   const [googleSigninInProgress, setGoogleSigninInProgress] = useState(false);
 
@@ -82,16 +84,14 @@ const GoogleLoginButton = (props) => {
   };
 
   return (
-    <View>
-      <Button
-        title='Google Sign-In'
-        onPress={() =>
-          onGoogleButtonPress().then(() =>
-            console.log('Signed in with Google!')
-          )
-        }
-      />
-    </View>
+    <TouchableOpacity
+      style={styles.button}
+      onPress={() =>
+        onGoogleButtonPress().then(() => console.log('Signed in with Google!'))
+      }
+    >
+      <Text style={styles.text}>{text}</Text>
+    </TouchableOpacity>
   );
 };
 

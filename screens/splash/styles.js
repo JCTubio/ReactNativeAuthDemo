@@ -3,12 +3,13 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexGrow: 0,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  message: {
-    marginTop: 20,
+  logo: {
+    height: 200,
+    width: 200,
+    marginBottom: 150,
   },
 });
 

@@ -16,7 +16,13 @@ import {
 import styles from './styles';
 
 export const Form = (props) => {
-  const { formData, initialData, onSubmit, title } = props;
+  const {
+    formData,
+    initialData,
+    onSubmit,
+    title,
+    submitButtonText = 'Submit',
+  } = props;
 
   const {
     register,
@@ -159,7 +165,7 @@ export const Form = (props) => {
       )}
       {renderFormFields()}
       <TouchableOpacity style={styles.button} onPress={validateForm}>
-        <Text style={styles.buttonText}>Sign up </Text>
+        <Text style={styles.buttonText}>{submitButtonText}</Text>
       </TouchableOpacity>
     </View>
   );

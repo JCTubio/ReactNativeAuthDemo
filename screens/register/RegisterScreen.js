@@ -62,7 +62,11 @@ const RegisterScreen = (props) => {
                 <Text style={styles.errorMessage}>{errorMessage}</Text>
               )}
             </View>
-            <Form formData={REGISTER_FORM} onSubmit={handleSignUp} />
+            <Form
+              formData={REGISTER_FORM}
+              onSubmit={handleSignUp}
+              submitButtonText='Register'
+            />
             <View style={styles.redirectTextContainer}>
               <Text>Already registered? </Text>
               <TouchableOpacity

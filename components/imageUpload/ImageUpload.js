@@ -1,7 +1,7 @@
 import React from 'react';
 import storage from '@react-native-firebase/storage';
 import ImagePicker from 'react-native-image-picker';
-import { Image, View, Platform, Button } from 'react-native';
+import { Image, View, Platform, TouchableOpacity, Text } from 'react-native';
 
 import imagePlaceholder from '../../assets/images/avatar_placeholder.png';
 
@@ -40,16 +40,14 @@ const ImageUpload = (props) => {
   };
 
   return (
-    <View style={styles.profilePicInputField}>
+    <View style={styles.inputField}>
       <Image
-        style={styles.profilePic}
+        style={styles.image}
         source={value ? { uri: value } : imagePlaceholder}
       />
-      <Button
-        onPress={handleImageUpload}
-        title={buttonTitle}
-        style={styles.profilePicUploadButton}
-      />
+      <TouchableOpacity onPress={handleImageUpload} style={styles.button}>
+        <Text style={styles.buttonText}>{buttonTitle}</Text>
+      </TouchableOpacity>
     </View>
   );
 };

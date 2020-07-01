@@ -8,6 +8,7 @@ import RegisterScreen from './screens/register';
 import LoginScreen from './screens/login';
 import HomeScreen from './screens/home';
 import ProfileEditScreen from './screens/profileEdit';
+import SplashScreen from './screens/splash';
 import { ROUTES } from './constants/routes';
 
 //Using react-native-firebase there is no need to initialize firebase, it is done automatically
@@ -17,14 +18,24 @@ const AuthStack = createStackNavigator();
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged((user) => {
       FirebaseService.setUser(user);
       setCurrentUser(user);
     });
-    return subscriber;
+    return () => subscriber();
   });
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setIsLoading(false), 1000);
+    return () => clearTimeout(timeout);
+  });
+
+  if (isLoading) {
+    return <SplashScreen />;
+  }
 
   return (
     <NavigationContainer>
@@ -42,7 +53,11 @@ export default function App() {
         </AppStack.Navigator>
       ) : (
         <AuthStack.Navigator initialRouteName={ROUTES.login}>
-          <AuthStack.Screen name={ROUTES.login} component={LoginScreen} />
+          <AuthStack.Screen
+            options={{ headerShown: false }}
+            name={ROUTES.login}
+            component={LoginScreen}
+          />
           <AuthStack.Screen name={ROUTES.register} component={RegisterScreen} />
         </AuthStack.Navigator>
       )}

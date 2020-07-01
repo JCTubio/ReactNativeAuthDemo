@@ -123,7 +123,7 @@ export const REGISTER_FORM = [
 export const LOGIN_FORM = [
   {
     name: 'email',
-    label: 'Email',
+    label: 'Log in with email',
     type: 'text',
     validation: {
       required: 'Email is required',

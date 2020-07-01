@@ -6,10 +6,12 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    flexGrow: 1,
     backgroundColor: '#fff',
   },
   inner: {
     flex: 1,
+    flexGrow: 1,
     justifyContent: 'flex-end',
   },
   titleContainer: {
@@ -81,23 +83,12 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: '#161F3D',
   },
-  button: {
-    backgroundColor: '#4A90E2',
-    borderRadius: 4,
-    height: 52,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 18,
-  },
-  buttonText: {
-    color: '#fff',
-    fontWeight: '500',
-  },
   redirectTextContainer: {
     flex: 0,
     flexDirection: 'row',
     justifyContent: 'center',
     marginHorizontal: 30,
+    marginBottom: 20,
   },
   linkText: {
     color: '#1A73E8',
